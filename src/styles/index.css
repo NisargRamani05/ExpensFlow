@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #D4AF37; /* Metallic Gold */
+  --color-primary-light: #F3E5AB; /* Light Gold/Champagne */
+  --color-primary-dark: #AA8222; /* Dark Gold/Bronze */
+  
+  --color-accent: #FFFFFF; /* Pure White */
+  --color-danger: #FF3B30; 
+  --color-warning: #FF9500;
+  
+  --color-bg: #000000; /* Pure Black */
+  --color-bg-secondary: #0A0A0A; /* Extremely Dark Charcoal */
+  --color-bg-card: #111111; /* Matte Obsidian */
+  
+  --color-border: #222222; /* Very subtle border */
+  --color-border-gold: rgba(212, 175, 55, 0.3);
+  
+  --color-text: #FFFFFF; /* Pure White */
+  --color-text-muted: #888888; /* Elegant Grey */
+  
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  /* Minimalist Luxury Card */
+  .glass {
+    @apply bg-bg-card border border-[#222] rounded-xl;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300 hover:border-primary/50 hover:bg-[#151515] hover:-translate-y-1;
+  }
+
+  /* Black Card Gradient */
+  .gradient-bg {
+    background: radial-gradient(circle at center, #111 0%, #000 100%);
+  }
+
+  /* Gold Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA8222 100%);
+  }
+
+  /* Serif heading class */
+  .font-luxury {
+    font-family: var(--font-serif);
+  }
+
+  /* Tabular nums for financial data */
+  .numeric {
+    font-variant-numeric: tabular-nums;
+  }
+}
