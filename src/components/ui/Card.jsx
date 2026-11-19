@@ -23,16 +23,16 @@ export function StatCard({ title, value, subtitle, icon: Icon, trend, className 
         <div className="flex items-center justify-between mb-4">
           <span className="text-sm text-text-muted font-medium uppercase tracking-wider">{title}</span>
           {Icon && (
-            <div className="p-2 rounded-lg bg-black border border-white/5">
+            <div className="p-2 rounded-lg bg-bg border border-border">
               <Icon className="w-4 h-4 text-primary" />
             </div>
           )}
         </div>
-        <p className="text-3xl font-luxury numeric text-white mb-1">{value}</p>
+        <p className="text-3xl font-bold numeric text-text mb-1">{value}</p>
         {(subtitle || trend) && (
           <div className="flex items-center gap-2 mt-2">
             {trend && (
-              <span className={cn('text-xs font-semibold px-2 py-1 rounded bg-black border', trend > 0 ? 'text-primary border-primary/30' : 'text-danger border-danger/30')}>
+              <span className={cn('text-xs font-semibold px-2 py-1 rounded bg-bg border', trend > 0 ? 'text-primary border-primary/30' : 'text-danger border-danger/30')}>
                 {trend > 0 ? '+' : ''}{trend}%
               </span>
             )}

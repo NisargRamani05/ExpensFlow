@@ -1,8 +1,22 @@
+import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { useThemeInit } from '@/hooks/useTheme';
+import { authService } from '@/services/auth.service';
 
 export function AppProviders({ children }) {
   useThemeInit();
+
+  // Listen for Firebase auth state changes and keep Zustand store in sync
+  useEffect(() => {
+    let unsubscribe = () => {};
+    const result = authService.onAuthStateChanged(() => {});
+    if (result && typeof result.then === 'function') {
+      result.then((unsub) => {
+        if (unsub) unsubscribe = unsub;
+      });
+    }
+    return () => unsubscribe();
+  }, []);
 
   return (
     <>

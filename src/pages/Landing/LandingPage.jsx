@@ -153,7 +153,7 @@ export default function LandingPage() {
                   <span className="text-xs text-text-muted tracking-[0.15em] uppercase">{stat.label}</span>
                   <stat.icon className="w-5 h-5 text-primary" />
                 </div>
-                <p className="text-4xl font-luxury numeric mb-2 text-white">{stat.value}</p>
+                <p className="text-4xl font-bold numeric mb-2 text-white">{stat.value}</p>
                 <span className="text-xs text-primary tracking-wider">{stat.change}</span>
               </motion.div>
             ))}

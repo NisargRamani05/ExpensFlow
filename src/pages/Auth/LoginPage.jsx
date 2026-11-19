@@ -42,7 +42,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-bg flex selection:bg-primary/30 selection:text-white">
+    <div className="min-h-screen bg-bg flex selection:bg-primary/30 selection:text-white relative">
+      {/* Logo — top left, links to landing */}
+      <Link
+        to="/"
+        className="absolute top-6 left-8 z-50 flex items-center gap-2.5 group"
+        title="ExpenseFlow — Back to Landing Page"
+      >
+        <div className="p-1.5 rounded bg-black border border-[#333] group-hover:border-primary/50 transition-colors">
+          <CreditCard className="w-4 h-4 text-primary" />
+        </div>
+        <span className="font-luxury text-lg text-white/80 group-hover:text-primary tracking-wide transition-colors">
+          ExpenseFlow
+        </span>
+      </Link>
+
       {/* Left Panel */}
       <div className="hidden lg:flex flex-1 relative items-center justify-center gradient-bg border-r border-[#222]">
         <div className="absolute inset-0 overflow-hidden">

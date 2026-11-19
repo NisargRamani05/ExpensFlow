@@ -9,7 +9,6 @@ import {
   BarChart3,
   Settings,
   LogOut,
-  ChevronLeft,
   Menu,
   X,
   CreditCard
@@ -47,7 +46,7 @@ export function Sidebar() {
   return (
     <>
       <AnimatePresence>
-        {!sidebarOpen && (
+        {sidebarOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -63,22 +62,30 @@ export function Sidebar() {
         animate={{ x: sidebarOpen || isDesktop ? 0 : -280 }}
         className={cn(
           'fixed left-0 top-0 h-full w-[280px] z-50 flex flex-col',
-          'bg-[#0A0A0A] border-r border-[#222]',
+          'bg-bg-secondary border-r border-border',
           'lg:translate-x-0 lg:static lg:z-auto'
         )}
       >
         <div className="p-8 flex flex-col gap-2">
-          <Link to="/" className="flex items-center gap-3 mb-2 hover:opacity-80 transition-opacity cursor-pointer">
-            <div className="p-2 rounded bg-black border border-[#333]">
+          <Link
+            to="/"
+            onClick={() => {
+              if (window.innerWidth < 1024) setSidebarOpen(false);
+            }}
+            className="flex items-center gap-3 mb-2 hover:opacity-85 transition-opacity cursor-pointer group"
+            title="ExpenseFlow — Back to Landing Page"
+          >
+            <div className="p-2 rounded bg-bg border border-border group-hover:border-primary/50 transition-colors">
               <CreditCard className="w-5 h-5 text-primary" />
             </div>
-            <h1 className="font-luxury text-2xl text-white tracking-wide">ExpenseFlow</h1>
+            <h1 className="font-luxury text-2xl text-text tracking-wide group-hover:text-primary transition-colors">ExpenseFlow</h1>
           </Link>
           <p className="text-xs text-text-muted uppercase tracking-[0.2em]">Private Wealth</p>
           
           <button
             onClick={() => setSidebarOpen(false)}
-            className="absolute top-8 right-6 lg:hidden p-1.5 text-text-muted hover:text-white"
+            className="absolute top-8 right-6 lg:hidden p-1.5 text-text-muted hover:text-text transition-colors"
+            aria-label="Close sidebar"
           >
             <X className="w-5 h-5" />
           </button>
@@ -96,8 +103,8 @@ export function Sidebar() {
                   cn(
                     'flex items-center gap-4 px-4 py-3 rounded-lg text-sm transition-all duration-300',
                     isActive
-                      ? 'bg-[#111] text-primary font-medium shadow-[inset_2px_0_0_#D4AF37]'
-                      : 'text-text-muted hover:text-white hover:bg-[#111]'
+                      ? 'bg-bg-card text-primary font-medium shadow-[inset_2px_0_0_#D4AF37]'
+                      : 'text-text-muted hover:text-text hover:bg-bg-card'
                   )
                 }
               >
@@ -108,19 +115,19 @@ export function Sidebar() {
           })}
         </nav>
 
-        <div className="p-6 border-t border-[#222]">
-          <div className="flex items-center gap-3 px-4 py-3 mb-4 rounded-lg bg-black border border-[#333]">
+        <div className="p-6 border-t border-border">
+          <div className="flex items-center gap-3 px-4 py-3 mb-4 rounded-lg bg-bg border border-border">
             <div className="w-8 h-8 rounded bg-gradient-to-br from-[#D4AF37] to-[#AA8222] flex items-center justify-center text-sm font-luxury text-black">
               {user?.name?.[0]?.toUpperCase() || 'U'}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm text-white truncate">{user?.name}</p>
+              <p className="text-sm text-text truncate">{user?.name}</p>
               <p className="text-xs text-text-muted truncate">{user?.email}</p>
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm text-text-muted hover:text-white transition-colors"
+            className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-sm text-text-muted hover:text-text transition-colors"
           >
             <LogOut className="w-4 h-4" />
             <span className="tracking-wide">Sign Out</span>
@@ -135,21 +142,39 @@ export function Navbar({ title, subtitle, actions }) {
   const setSidebarOpen = useUIStore((s) => s.setSidebarOpen);
 
   return (
-    <header className="sticky top-0 z-30 bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#222] px-8 py-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+    <header className="sticky top-0 z-30 bg-bg-secondary/90 backdrop-blur-xl border-b border-border px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="lg:hidden p-2 rounded hover:bg-[#111] border border-[#333]"
+            className="lg:hidden p-2 rounded hover:bg-bg-card border border-border text-text-muted hover:text-text transition-colors flex-shrink-0"
+            aria-label="Open sidebar menu"
           >
-            <Menu className="w-5 h-5 text-text-muted" />
+            <Menu className="w-5 h-5" />
           </button>
-          <div>
-            <h1 className="text-2xl font-luxury text-white tracking-wide">{title}</h1>
-            {subtitle && <p className="text-sm text-text-muted mt-1 tracking-wider uppercase">{subtitle}</p>}
+
+          {/* ExpenseFlow Logo — Top-left corner link to landing page */}
+          <Link
+            to="/"
+            className="flex items-center gap-2.5 group hover:opacity-85 transition-opacity flex-shrink-0"
+            title="ExpenseFlow — Back to Landing Page"
+          >
+            <div className="p-1.5 rounded bg-bg border border-border group-hover:border-primary/50 transition-colors flex items-center justify-center">
+              <CreditCard className="w-4 h-4 text-primary" />
+            </div>
+            <span className="font-luxury text-lg sm:text-xl text-text tracking-wide group-hover:text-primary transition-colors">
+              ExpenseFlow
+            </span>
+          </Link>
+
+          <div className="h-5 w-px bg-border hidden sm:block flex-shrink-0" />
+
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-luxury text-text tracking-wide truncate">{title}</h1>
+            {subtitle && <p className="text-xs text-text-muted mt-0.5 tracking-wider uppercase truncate">{subtitle}</p>}
           </div>
         </div>
-        {actions && <div className="flex items-center gap-4">{actions}</div>}
+        {actions && <div className="flex items-center gap-3 flex-shrink-0">{actions}</div>}
       </div>
     </header>
   );
@@ -174,23 +199,26 @@ export function MarketingNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-2xl border-b border-[#222] transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-bg-secondary/80 backdrop-blur-2xl border-b border-border transition-all duration-300">
       <div className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-        <motion.div
-          whileHover={{ opacity: 0.8 }}
-          className="flex items-center gap-3 cursor-pointer"
-          onClick={() => navigate('/')}
+        <Link
+          to="/"
+          className="flex items-center gap-3 cursor-pointer group hover:opacity-85 transition-opacity"
+          title="ExpenseFlow — Home"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
         >
-          <div className="p-2 rounded bg-black border border-[#333]">
+          <div className="p-2 rounded bg-bg border border-border group-hover:border-primary/50 transition-colors">
             <CreditCard className="w-5 h-5 text-primary" />
           </div>
-          <span className="font-luxury text-2xl tracking-wide text-white">ExpenseFlow</span>
-        </motion.div>
+          <span className="font-luxury text-2xl tracking-wide text-text group-hover:text-primary transition-colors">ExpenseFlow</span>
+        </Link>
 
         <div className="hidden md:flex items-center gap-10 text-xs font-medium text-text-muted uppercase tracking-[0.15em]">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#how-it-works" className="hover:text-white transition-colors">Philosophy</a>
-          <a href="#pricing" className="hover:text-white transition-colors">Membership</a>
+          <a href="#features" className="hover:text-text transition-colors">Features</a>
+          <a href="#how-it-works" className="hover:text-text transition-colors">Philosophy</a>
+          <a href="#pricing" className="hover:text-text transition-colors">Membership</a>
         </div>
 
         <div className="flex items-center gap-6">
@@ -205,7 +233,7 @@ export function MarketingNavbar() {
             <>
               <button
                 onClick={() => navigate('/login')}
-                className="hidden md:block text-xs font-medium text-text-muted hover:text-white transition-colors uppercase tracking-[0.1em]"
+                className="hidden md:block text-xs font-medium text-text-muted hover:text-text transition-colors uppercase tracking-[0.1em]"
               >
                 Sign In
               </button>
@@ -218,7 +246,7 @@ export function MarketingNavbar() {
             </>
           )}
           <button
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2 text-text"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -232,18 +260,18 @@ export function MarketingNavbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0A0A0A] border-t border-[#222]"
+            className="md:hidden bg-bg-secondary border-t border-border"
           >
             <div className="p-8 flex flex-col gap-6 text-center">
-              <a href="#features" className="text-text-muted hover:text-white text-xs uppercase tracking-[0.15em]" onClick={() => setMobileMenuOpen(false)}>Features</a>
-              <a href="#how-it-works" className="text-text-muted hover:text-white text-xs uppercase tracking-[0.15em]" onClick={() => setMobileMenuOpen(false)}>Philosophy</a>
-              <a href="#pricing" className="text-text-muted hover:text-white text-xs uppercase tracking-[0.15em]" onClick={() => setMobileMenuOpen(false)}>Membership</a>
-              <div className="h-px bg-[#222] my-4" />
+              <a href="#features" className="text-text-muted hover:text-text text-xs uppercase tracking-[0.15em]" onClick={() => setMobileMenuOpen(false)}>Features</a>
+              <a href="#how-it-works" className="text-text-muted hover:text-text text-xs uppercase tracking-[0.15em]" onClick={() => setMobileMenuOpen(false)}>Philosophy</a>
+              <a href="#pricing" className="text-text-muted hover:text-text text-xs uppercase tracking-[0.15em]" onClick={() => setMobileMenuOpen(false)}>Membership</a>
+              <div className="h-px bg-border my-4" />
               {isAuthenticated ? (
                 <button onClick={() => navigate('/app/dashboard')} className="w-full py-4 rounded bg-gradient-to-r from-[#D4AF37] to-[#AA8222] text-black font-semibold tracking-wide">Access Dashboard</button>
               ) : (
                 <div className="flex flex-col gap-4">
-                  <button onClick={() => navigate('/login')} className="w-full py-4 rounded border border-[#333] text-white font-semibold">Sign In</button>
+                  <button onClick={() => navigate('/login')} className="w-full py-4 rounded border border-border text-text font-semibold">Sign In</button>
                   <button onClick={() => navigate('/signup')} className="w-full py-4 rounded bg-gradient-to-r from-[#D4AF37] to-[#AA8222] text-black font-semibold tracking-wide">Apply Now</button>
                 </div>
               )}

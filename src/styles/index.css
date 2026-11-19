@@ -35,22 +35,35 @@
   body {
     @apply bg-bg text-text font-sans antialiased;
   }
+
+  .light {
+    --color-bg: #FAFAFA;
+    --color-bg-secondary: #F0F0F0;
+    --color-bg-card: #FFFFFF;
+    
+    --color-border: #E5E5E5;
+    --color-border-gold: rgba(212, 175, 55, 0.4);
+    
+    --color-text: #111111;
+    --color-text-muted: #666666;
+    
+    --color-accent: #000000;
+  }
 }
 
 @layer utilities {
   /* Minimalist Luxury Card */
   .glass {
-    @apply bg-bg-card border border-[#222] rounded-xl;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    @apply bg-bg-card border border-border rounded-xl shadow-lg;
   }
 
   .glass-hover {
-    @apply transition-all duration-300 hover:border-primary/50 hover:bg-[#151515] hover:-translate-y-1;
+    @apply transition-all duration-300 hover:border-primary/50 hover:-translate-y-1;
   }
 
   /* Black Card Gradient */
   .gradient-bg {
-    background: radial-gradient(circle at center, #111 0%, #000 100%);
+    background: radial-gradient(circle at center, var(--color-bg-card) 0%, var(--color-bg) 100%);
   }
 
   /* Gold Text */

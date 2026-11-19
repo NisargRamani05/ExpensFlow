@@ -43,7 +43,7 @@ export default function GoalsPage() {
     addToGoal(showAddFunds, parseFloat(fundAmount));
     setFundAmount('');
     setShowAddFunds(null);
-    toast.success('Funds added to goal!');
+    toast.success('Funds added & transaction logged!');
   };
 
   return (

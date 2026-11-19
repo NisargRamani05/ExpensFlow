@@ -1,6 +1,6 @@
 export const CATEGORIES = {
   income: ['Salary', 'Freelance', 'Investment', 'Gift', 'Other Income'],
-  expense: ['Food', 'Transport', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Travel', 'Other'],
+  expense: ['Food', 'Transport', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Travel', 'Savings Goal', 'Other'],
 };
 
 export const CURRENCIES = [
@@ -30,6 +30,7 @@ export const CATEGORY_COLORS = {
   Investment: '#3B82F6',
   Gift: '#EC4899',
   'Other Income': '#14B8A6',
+  'Savings Goal': '#D4AF37',
 };
 
 export const NAV_ITEMS = [

@@ -134,7 +134,7 @@ export default function SettingsPage() {
                       setNotifications({ ...notifications, [item.key]: !notifications[item.key] })
                     }
                     className={`relative w-12 h-6 rounded-full transition-colors ${
-                      notifications[item.key] ? 'bg-primary/30' : 'bg-white/10'
+                      notifications[item.key] ? 'bg-primary/30' : 'bg-border'
                     }`}
                   >
                     <span

@@ -97,7 +97,7 @@ export default function DashboardPage() {
             <Card>
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h2 className="text-xl font-luxury text-white">Cash Flow Velocity</h2>
+                  <h2 className="text-xl font-luxury text-text">Cash Flow Velocity</h2>
                   <p className="text-xs text-text-muted mt-1 uppercase tracking-[0.1em]">6-Month Trajectory</p>
                 </div>
               </div>
@@ -108,7 +108,7 @@ export default function DashboardPage() {
           <FadeIn delay={0.1}>
             <Card className="h-full">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-luxury text-white">Recent Ledger</h2>
+                <h2 className="text-xl font-luxury text-text">Recent Ledger</h2>
                 <button
                   onClick={() => navigate('/app/transactions')}
                   className="text-xs text-primary font-medium flex items-center gap-2 hover:opacity-80 transition-opacity uppercase tracking-wider"

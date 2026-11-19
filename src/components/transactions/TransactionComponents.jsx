@@ -69,7 +69,7 @@ export function TransactionForm({ initial, onSubmit, onCancel }) {
   const categories =
     form.type === 'income'
       ? ['Salary', 'Freelance', 'Investment', 'Gift', 'Other Income']
-      : ['Food', 'Transport', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Travel', 'Other'];
+      : ['Food', 'Transport', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Travel', 'Savings Goal', 'Other'];
 
   const handleSubmit = (e) => {
     e.preventDefault();
